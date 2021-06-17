@@ -9,14 +9,7 @@ import cv2
 import face_recognition
 import numpy as np
 import datetime
-import resource
 import os
-
-
-fungsi_wajah = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-fungsi_mata = cv2.CascadeClassifier('haarcascade_eye.xml')
-
-buka = cv2.VideoCapture(0)
 
 class Ui_OutputDialog(QDialog):
     def __init__(self):
@@ -42,20 +35,8 @@ class Ui_OutputDialog(QDialog):
         self.timer=QTimer(self)
         self.timer.timeout.connect(self.update_frame)
         self.timer.start(5)
-        #self.startButton.clicked.connect(self.start_webcam)
-        #self.stopButton.clicked.connect(self.stop_webcam)
-        #self.detectButton.setCheckable(True)
-        #self.detectButton.toggled.connect(self.detect_webcam_face)
         self.face_Enabled=False
         self.faceCascade=cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-
-    def detect_webcam_face(self,status):
-            if status:
-                self.detectButton.setText('Stop Detection')
-                self.face_Enabled=True
-            else:
-                self.detectButton.setText('Detect Face')
-                self.face_Enabled=False
 
     def update_frame(self):
         ret,self.image=self.capture.read()
